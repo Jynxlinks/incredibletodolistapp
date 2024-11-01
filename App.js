@@ -1,38 +1,39 @@
-/**
- * My To Do List App
- *
- * @format
- */
- 
-import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-} from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, StyleSheet } from 'react-native';
 import ToDoList from './components/ToDoList';
 import ToDoForm from './components/ToDoForm';
- 
- 
+
 function App() {
+  const [tasks, setTasks] = useState([
+    { text: 'Do laundry', completed: false },
+    { text: 'Go to gym', completed: true },
+    { text: 'Walk dog', completed: false },
+  ]);
+
   return (
-    <SafeAreaView>
-      <ToDoList styles={styles} />
-      <ToDoForm styles={styles} />
+    <SafeAreaView style={styles.container}>
+      <ToDoList tasks={tasks} styles={styles} />
+      <ToDoForm styles={styles} addTask={setTasks} />
     </SafeAreaView>
   );
 }
- 
+
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#f8f9fa',
+  },
   task: {
     padding: 10,
     borderBottomWidth: 1,
     borderColor: '#ccc',
   },
-  completed: {
-    backgroundColor: '#e0e0e0',
-  },
   taskText: {
     fontSize: 16,
+  },
+  completed: {
+    backgroundColor: '#e0e0e0',
   },
   form: {
     flexDirection: 'row',
@@ -50,5 +51,5 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
 });
- 
+
 export default App;
