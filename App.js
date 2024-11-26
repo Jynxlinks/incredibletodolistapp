@@ -10,10 +10,21 @@ function App() {
     { text: 'Walk dog', completed: false },
   ]);
 
+  // Function to add a new task
+  const addTask = (taskText) => {
+    // Prevent duplicates and empty tasks
+    if (!taskText || tasks.some((task) => task.text === taskText)) return;
+
+    setTasks([...tasks, { text: taskText, completed: false }]);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
+      {/* Display the ToDo list */}
       <ToDoList tasks={tasks} styles={styles} />
-      <ToDoForm styles={styles} addTask={setTasks} />
+
+      {/* Add tasks via the ToDoForm */}
+      <ToDoForm styles={styles} addTask={addTask} />
     </SafeAreaView>
   );
 }
